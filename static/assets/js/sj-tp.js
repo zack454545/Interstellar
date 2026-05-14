@@ -25,6 +25,10 @@
     return `${protocol}://${location.host}/wisp/`;
   }
 
+  function getBareUrl() {
+    return `${location.origin}/ca/`;
+  }
+
   async function initSjTransport() {
     if (typeof window.$scramjetLoadController !== "function") {
       throw new Error("Sj bundle did not load.");
@@ -39,7 +43,7 @@
     await sj.init();
 
     const connection = new BareMuxConnection("/bm/worker.js");
-    await connection.setTransport("/ep/index.mjs", [{ wisp: getWispUrl() }]);
+    await connection.setTransport("/ep/index.mjs", [{ wisp: getWispUrl() }, { bare: getBareUrl() }]);
 
     window.__isSj = {
       connection,

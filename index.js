@@ -22,7 +22,11 @@ const server = http.createServer({
   keepAliveTimeout: 60000, // 60 seconds
 });
 const app = express();
-const bareServer = createBareServer("/ca/");
+const bareServer = createBareServer("/ca/", {
+  logErrors: true,
+  blockLocal: false,
+  family: 0
+});
 const { baremuxPath } = bareMuxNode;
 const epoxyDistPath = path.join(
   __dirname,

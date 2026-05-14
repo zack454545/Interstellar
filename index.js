@@ -17,7 +17,10 @@ import config from "./config.js";
 console.log(chalk.yellow("🚀 Starting server..."));
 
 const __dirname = process.cwd();
-const server = http.createServer();
+const server = http.createServer({
+  keepAlive: true,
+  keepAliveTimeout: 60000, // 60 seconds
+});
 const app = express();
 const bareServer = createBareServer("/ca/");
 const { baremuxPath } = bareMuxNode;
@@ -34,6 +37,7 @@ const CACHE_TTL = 30 * 24 * 60 * 60 * 1000; // Cache for 30 Days
 
 wisp.options.allow_loopback_ips = true;
 wisp.options.allow_private_ips = true;
+wisp.options.heartbeat = 30000; // 30 seconds heartbeat
 
 if (config.challenge !== false) {
   console.log(chalk.green("🔒 Password protection is enabled! Listing logins below"));

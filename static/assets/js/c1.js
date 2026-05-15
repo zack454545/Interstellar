@@ -280,6 +280,11 @@ fetch(path)
           app.partial = true;
           app.say = "Now.gg is currently not working for some users.";
         }
+      } else if (app.link?.includes("play.geforcenow.com")) {
+        if (app.now === null || app.now === undefined) {
+          app.now = true;
+          app.say = "Geforce NOW is opened directly to avoid login errors.";
+        }
       } else if (app.link?.includes("nowgg.nl")) {
         if (app.error === null || app.error === undefined) {
           app.error = true;

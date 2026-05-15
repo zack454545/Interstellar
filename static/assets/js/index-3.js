@@ -85,6 +85,17 @@ function dy(value) {
   processUrl(value, `/a/q/${__uv$config.encodeUrl(value)}`);
 }
 
+function now(value) {
+  if (!isUrl(value)) {
+    value = `https://${value}`;
+  }
+
+  const newWindow = window.open(value, "_blank");
+  if (!newWindow) {
+    window.location.href = value;
+  }
+}
+
 function isUrl(val = "") {
   if (/^http(s?):\/\//.test(val) || (val.includes(".") && val.substr(0, 1) !== " ")) {
     return true;
